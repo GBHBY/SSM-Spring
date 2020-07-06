@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+    <!--创建bean的三种方式：-->
+    <!--第一种方式，使用默认构造函数创建，如果构造函数有参数，那么就会报错-->
+    <!--<bean id="accountService" class="com.GYB.service.impl.AccountServiceImpl"/>-->
+
+    <!--第二种方式，使用普通工厂创建对象，也就是使用工厂类中的某个方法来创建对象-->
+    <!--   <bean id="instanceFactory" class="com.GYB.factory.InstanceFactory" />
+       <bean id="accountService"  factory-bean="instanceFactory" factory-method="getAccountService"/>-->
+    <!--第三种方式：使用工厂中的静态方法创建对象，使用某个类中的静态方法创建对象，并存入Spring容器-->
+   <!-- <bean id="accountService" class="com.GYB.factory.StaticFactory" factory-method="getAccountService"/>-->
+
+
+    <!--bean的作用范围-->
+        <!--用bean的scope标签来调整，属性如下：-->
+            <!--singleton: 单例的，默认值-->
+            <!--prototype：多例的-->
+            <!--request：作用于web应用的请求范围-->
+            <!--session：作用域web的会话范围-->
+            <!--global-session：作用于集群环境的会话范围，当不是集群环境时，这个值就是session-->
+
+    <!--bean的生命周期-->
+        <!--单例对象-->
+            <!--一旦解析完配置文件，对象就会产生对象，只要容器存在，对象就存在-->
+    <bean id="accountService" class="com.GYB.factory.StaticFactory" factory-method="getAccountService" scope="singleton" init-method="init" destroy-method="destroy" />
+        <!--多例对象-->
+            <!--使用对象时，对象才会产生，并且只要对象在使用，就会一直存在，当对象长时间不使用，且没有别的对象引用，由Java的垃圾回收机制回收-->
+
+</beans>
