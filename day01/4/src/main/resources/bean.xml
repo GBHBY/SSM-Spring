@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+       &lt;!&ndash;构造函数注入&ndash;&gt;
+      <bean id="accountService" class="com.GYB.service.impl.AccountServiceImpl">
+          &lt;!&ndash;
+          index:给构造函数中指定索引值的参数进行注入，从0开始
+          type:指定要注入的数据的数据类型，该数据类型也是构造函数中的某些参数的类型，比如说有两个String类型的数据，那么指定到底注入哪个属性
+          name：用于给构造函数中指定名称的函数进行赋值
+          =======================以上三个用于指定给构造函数中哪个参数进行赋值==========================================
+          value:用于给基本类型和String类型
+          ref：用来引用关联的bean对象，也就是说如果是对象的值，那么就需要这个属性
+          &ndash;&gt;
+          <constructor-arg name="age" value="321"/>
+          &lt;!&ndash;日期对象无法赋值&ndash;&gt;
+          <constructor-arg name="birthday" ref="birthday11"/>
+          <constructor-arg name="name" value="test"/>
+
+      </bean>
+
+     -->
+
+
+
+    <!--=================================我是分割线================================================================-->
+    <!--set方法注入-->
+    <!--涉及的标签:property
+        放在bean的内部
+        index:给构造函数中指定索引值的参数进行注入，从0开始
+        type:指定要注入的数据的数据类型，该数据类型也是构造函数中的某些参数的类型，比如说有两个String类型的数据，那么指定到底注入哪个属性
+        name：set方法名称中的属性，比如setUserName,那么name的值就是name，是根据set方法名来判断name属性，而不是定义的属性名
+
+    -->
+    <bean id="accountService" class="com.GYB.service.impl.AccountServiceImpl">
+        <property name="age" value="12"/>
+        <property name="name" value="huif"/>
+        <!--ref和上面的一样-->
+        <property name="birthday" ref="birthday11"/>
+
+
+    </bean>
+
+    <!--配置日期对象,然后把ID放入ref中-->
+    <bean id="birthday11" class="java.util.Date"/>
+
+    <!--======================================我是分割线==============================================================-->
+    <!--======================================复杂类型的注入==============================================================-->
+
+    <bean id="userService" class="com.GYB.service.impl.UserServiceIpml">
+        <property name="name">
+             <array>
+                 <value>驻军超</value>
+                 <value>卜姬成</value>
+                 <value>郭煜博</value>
+             </array>
+        </property>
+
+        <property name="ages">
+            <list>
+                <value>陈冠希</value>
+                <value>张柏芝</value>
+                <value>阿娇</value>
+            </list>
+        </property>
+
+        <property name="birthdays">
+            <set>
+                <value>冯楠</value>
+                <value>巍蔚</value>
+            </set>
+        </property>
+
+        <property name="users">
+            <map>
+                <entry key="郭煜博" value="巍蔚"/>
+                <entry key="胡歌" value="江疏影"/>
+            </map>
+
+        </property>
+        
+        <property name="properties">
+            <props>
+                <prop key="死亡">活着</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
