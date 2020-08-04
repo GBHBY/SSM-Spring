@@ -1,0 +1,1 @@
+获取properties文件的具体原理，以及获取bean的具体原理，具体看BeanFactory,简化版IOC
